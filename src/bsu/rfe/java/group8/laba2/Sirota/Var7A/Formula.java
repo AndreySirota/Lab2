@@ -175,4 +175,32 @@ public class Formula extends JFrame{
         hboxButtons.add(buttonM);
         hboxButtons.add(Box.createHorizontalGlue());
 
-        
+        //создание вывода Sum
+        JLabel labelsum = new JLabel("Sum:");
+        Temp4 = new JTextField("0",15);
+        Temp4.setMaximumSize(Temp4.getPreferredSize());
+        Box hboxTemp = Box.createHorizontalBox();
+        hboxTemp.add(Box.createHorizontalGlue());
+        hboxTemp.add(labelsum);
+        hboxTemp.add(Box.createHorizontalStrut(10));
+        hboxTemp.add(Temp4);
+        hboxTemp.add(Box.createHorizontalGlue());
+        Temp4.setEditable(false);
+
+        //Сборка панелей окна
+        Box vboxOkna = Box.createVerticalBox();
+        vboxOkna.add(Box.createVerticalGlue());
+        vboxOkna.add(hboxFormulaType);
+        vboxOkna.add(hboxVariables);
+        vboxOkna.add(Box.createVerticalGlue());
+        vboxOkna.add(hboxResult);
+        vboxOkna.add(Box.createVerticalGlue());
+        vboxOkna.add(hboxButtons);
+        vboxOkna.add(Box.createVerticalGlue());
+        vboxOkna.add(hboxTemp);
+        vboxOkna.add(Box.createVerticalGlue());
+        getContentPane().add(vboxOkna, BorderLayout.CENTER);
+
+    }
+}
+
