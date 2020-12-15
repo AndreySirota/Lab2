@@ -100,4 +100,79 @@ public class Formula extends JFrame{
         hboxResult.add(textFieldResult);
         hboxResult.add(Box.createHorizontalGlue());
         textFieldResult.setEditable(false);
+//создание кнопок
+        JButton buttonVichislit = new JButton("Вычислить");
+        buttonVichislit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                try{
+                    Double x = Double.parseDouble(textFieldX.getText());
+                    Double y = Double.parseDouble(textFieldY.getText());
+                    Double z = Double.parseDouble(textFieldZ.getText());
+                    Double result;
+                    if (formulaId == 1)
+                        result = Formula_1(x, y, z);
+                    else
+                        result = Formula_2(x, y, z);
+                    textFieldResult.setText(result.toString());
+                } catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(Formula.this,"Ошибка в формате записи числа с " +
+                            "плавающей точкой", "Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        JButton buttonErase = new JButton("Очистить поля");
+        buttonErase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                textFieldX.setText("0");
+                textFieldY.setText("0");
+                textFieldZ.setText("0");
+                textFieldResult.setText("0");
+            }
+        });
+        //создание МС кнопки
+        JButton buttonMC = new JButton("MC");
+        buttonMC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                Temp4.setText("0");
+                textFieldX.setText("0");
+                textFieldY.setText("0");
+                textFieldZ.setText("0");
+                textFieldResult.setText("0");
+            }
+        });
+        //создание М+ кнопки
+        JButton buttonM = new JButton("M+");
+        buttonM.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                double temp2 = 0;
+                try{
+                    String temp = textFieldResult.getText();
+                    if(temp.isEmpty()){
+                        throw new IOException("Incorrect format");
+                    }
+                    temp2 = Double.valueOf(temp);
+                }
+                catch (IOException e){
+                    System.out.println("Please enter numbers");
+                }
+                sum += temp2;
+                String temp3 = Double.toString(sum);
+                Temp4.setText(temp3);
+            }
+        });
+        Box hboxButtons = Box.createHorizontalBox(); //создать коробку с горизонтальной укладкой
+        hboxButtons.add(Box.createHorizontalGlue()); //добавить "клей" C4-H1 с левой стороны
+        hboxButtons.add(buttonVichislit); // Добавить кнопку "Вычислить" в компоновку
+        hboxButtons.add(Box.createHorizontalStrut(40)); // Добавить распорку
+        hboxButtons.add(buttonErase);
+        hboxButtons.add(Box.createHorizontalStrut(40)); // Добавить распорку
+        hboxButtons.add(buttonMC);
+        hboxButtons.add(Box.createHorizontalStrut(40)); // Добавить распорку
+        hboxButtons.add(buttonM);
+        hboxButtons.add(Box.createHorizontalGlue());
 
+        
