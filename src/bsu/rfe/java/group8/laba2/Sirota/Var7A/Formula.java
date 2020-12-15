@@ -32,3 +32,72 @@ public class Formula extends JFrame{
     public Double Formula_2 (double x, double y, double z){
         return (Math.sin(Math.pow(z,y)) * Math.sin(Math.pow(z,y)) / Math.pow(1+x*x*x,1/2));
     }
+
+    //метод для добавления радио кнопок
+    private void addRadioButton(String buttonName, final int formulaId){
+        JRadioButton button = new JRadioButton(buttonName);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                Formula.this.formulaId = formulaId;
+            }
+        });
+        radioButtons.add(button);
+        hboxFormulaType.add(button);
+    }
+    public Formula(){
+        //вызов конструктора предка
+        super("Вычисление формулы");
+
+
+        //установка размера и положения окна
+        setSize(WIDTH,HEIGHT);
+        //для получения ряда характеристик
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        setLocation((kit.getScreenSize().width - WIDTH) / 2,(kit.getScreenSize().height - HEIGHT) / 2);
+
+
+        //Добавление радио-кнопок выбора формул
+        hboxFormulaType.add(Box.createHorizontalGlue());
+        addRadioButton("Формула 1", 1);
+        addRadioButton("Формула 2", 2);
+        radioButtons.setSelected(radioButtons.getElements().nextElement().getModel(),true);
+        hboxFormulaType.add(Box.createHorizontalGlue());
+
+        //Добавление текстовых полей для переменных
+        JLabel labelX = new JLabel("X:");
+        textFieldX = new JTextField("0", 10);
+        textFieldX.setMaximumSize(textFieldX.getPreferredSize());
+        JLabel labelY = new JLabel("Y:");
+        textFieldY = new JTextField("0", 10);
+        textFieldY.setMaximumSize(textFieldY.getPreferredSize());
+        JLabel labelZ = new JLabel("z:");
+        textFieldZ = new JTextField("0", 10);
+        textFieldZ.setMaximumSize(textFieldZ.getPreferredSize());
+        Box hboxVariables = Box.createHorizontalBox();
+        hboxVariables.add(Box.createHorizontalGlue());
+        hboxVariables.add(labelX);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldX);
+        hboxVariables.add(Box.createHorizontalStrut(50));
+        hboxVariables.add(labelY);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldY);
+        hboxVariables.add(Box.createHorizontalStrut(50));
+        hboxVariables.add(labelZ);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldZ);
+        hboxVariables.add(Box.createHorizontalGlue());
+
+        //Добавление области для вывода рузультатов
+        JLabel labelResult = new JLabel("Результат:");
+        textFieldResult = new JTextField("0",15);
+        textFieldResult.setMaximumSize(textFieldResult.getPreferredSize());
+        Box hboxResult = Box.createHorizontalBox();
+        hboxResult.add(Box.createHorizontalGlue());
+        hboxResult.add(labelResult);
+        hboxResult.add(Box.createHorizontalStrut(10));
+        hboxResult.add(textFieldResult);
+        hboxResult.add(Box.createHorizontalGlue());
+        textFieldResult.setEditable(false);
+
